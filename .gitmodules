@@ -1,0 +1,6 @@
+[submodule "build-infra"]
+	path = build-infra
+	url = git@github.com:Metaswitch/clearwater-build-infra.git
+[submodule "nginx-ensite"]
+	path = nginx-ensite
+	url = git@github.com:perusio/nginx_ensite.git

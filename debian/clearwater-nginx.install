@@ -1,0 +1,3 @@
+clearwater-nginx/* /
+nginx-ensite/nginx_ensite /usr/bin/
+nginx-ensite/nginx_dissite /usr/bin/
