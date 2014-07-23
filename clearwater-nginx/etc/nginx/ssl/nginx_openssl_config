@@ -1,0 +1,12 @@
+[ req ]
+distinguished_name     = nginx
+prompt                 = no
+
+[ nginx ]
+C                      = GB
+ST                     = London 
+L                      = Enfield
+O                      = Metaswitch Networks
+OU                     = Project Clearwater
+CN                     = Clearwater
+emailAddress           = clearwater@lists.projectclearwater.org
