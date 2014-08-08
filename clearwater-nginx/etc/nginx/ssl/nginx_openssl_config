@@ -3,10 +3,10 @@ distinguished_name     = nginx
 prompt                 = no
 
 [ nginx ]
-C                      = GB
-ST                     = London 
-L                      = Enfield
-O                      = Metaswitch Networks
-OU                     = Project Clearwater
-CN                     = Clearwater
-emailAddress           = clearwater@lists.projectclearwater.org
+C                      = UK
+ST                     = Unknown state
+L                      = Unknown locality
+O                      = Unknown organization
+OU                     = Unknown organizational unit
+CN                     = unknown.example
+emailAddress           = Unknown

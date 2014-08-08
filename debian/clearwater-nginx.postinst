@@ -55,8 +55,8 @@ case "$1" in
     configure)
       sudo service nginx start
       # Remove the default config and enable the ping server.
-      rm /etc/nginx/sites-enabled/default
-      rm /etc/nginx/sites-available/default
+      rm -f /etc/nginx/sites-enabled/default
+      rm -f /etc/nginx/sites-available/default
       nginx_ensite ping && service nginx reload
       mkdir -p /etc/nginx/ssl && cd /etc/nginx/ssl
       # Create a private key and a certificate signing request
