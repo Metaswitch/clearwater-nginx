@@ -60,9 +60,9 @@ case "$1" in
       nginx_ensite ping && service nginx reload
       mkdir -p /etc/nginx/ssl && cd /etc/nginx/ssl
       # Create a private key and a certificate signing request
-      openssl req -nodes -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
+      openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
       # Create a signed certificate using our own private key. Used for testing purposes.
-      openssl x509 -req -in nginx.csr -signkey nginx.key -out nginx.crt
+      openssl x509 -sha256 -req -in nginx.csr -signkey nginx.key -out nginx.crt
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
