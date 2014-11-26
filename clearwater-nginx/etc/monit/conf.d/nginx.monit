@@ -6,8 +6,7 @@ check process nginx pidfile /var/run/nginx.pid
   start program = "/etc/init.d/nginx start"
   stop program = "/etc/init.d/nginx stop"
   if failed host 127.0.0.1 port 80 protocol http
-    # TODO Temporarily commented out while monit version is tested
-    #hostheader 'localhost'
+    hostheader 'localhost'
     request "/ping"
     timeout 1 second
     for 3 cycles
