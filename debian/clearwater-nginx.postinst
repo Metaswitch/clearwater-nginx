@@ -69,6 +69,7 @@ case "$1" in
       openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
       # Create a signed certificate using our own private key. Used for testing purposes.
       openssl x509 -sha256 -req -in nginx.csr -signkey nginx.key -out nginx.crt
+      reload clearwater-monit || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
