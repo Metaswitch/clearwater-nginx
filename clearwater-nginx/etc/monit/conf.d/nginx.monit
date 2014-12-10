@@ -1,13 +1,22 @@
-# Poll every 10 seconds
-set daemon 10
+# Check the server's public interfaces.  We put this first so that we process
+# failed polls (and maybe kill the server) before we process the restart.
 
-# Monitor the server's PID file. Also poll http://127.0.0.1:80/ping to ensure that nginx itself is running.
 check process nginx pidfile /var/run/nginx.pid
-  start program = "/etc/init.d/nginx start"
-  stop program = "/etc/init.d/nginx stop"
+  start program   = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
+  stop program    = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
+  restart program = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx abort-restart'"
+
+  if memory is greater than 80% for 3 cycles
+     then restart
+
+  if uptime < 30 seconds
+     then exec "/bin/true"
+     else if succeeded
+         then exec "/usr/share/clearwater/bin/issue_alarm.py monit 5001.1"
+
   if failed host 127.0.0.1 port 80 protocol http
-    hostheader 'localhost'
-    request "/ping"
-    timeout 1 second
-    for 3 cycles
-    then restart
+     hostheader 'localhost'
+     request "/ping"
+     timeout 1 second
+     for 3 cycles
+     then restart
