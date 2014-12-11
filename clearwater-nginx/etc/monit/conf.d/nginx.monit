@@ -4,7 +4,6 @@
 check process nginx pidfile /var/run/nginx.pid
   start program   = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
   stop program    = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
-  restart program = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx abort-restart'"
 
   if memory is greater than 80% for 3 cycles
      then restart
