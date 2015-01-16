@@ -14,7 +14,7 @@ check process nginx pidfile /var/run/nginx.pid
          then exec "/usr/share/clearwater/bin/issue_alarm.py monit 5001.1"
 
   if failed host 127.0.0.1 port 80 protocol http
-     hostheader 'localhost'
+     hostheader 'ping'
      request "/ping"
      timeout 1 second
      for 3 cycles
