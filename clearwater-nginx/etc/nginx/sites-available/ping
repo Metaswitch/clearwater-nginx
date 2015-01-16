@@ -1,6 +1,6 @@
 server {
-        listen      [::]:80 default_server ipv6only=off;
-        server_name localhost;
+        listen      [::]:80 ipv6only=off;
+        server_name ping;
 
         location /ping {
                  return 200;
