@@ -6,8 +6,8 @@ nginx needs to provide secure HTTP communication between clients and servers. Th
 
 This requires the client accepting un-trusted certificates, and is the default option for the clearwater-nginx package. It involves the server creating its own CSR, which it uses to sign its certificate. Currently the post-install script for clearwater-nginx handles this using the openssl library.
 
-  openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
-  openssl x509 -sha256 -req -in nginx.csr -signkey nginx.key -out nginx.crt
+    openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
+    openssl x509 -sha256 -req -in nginx.csr -signkey nginx.key -out nginx.crt
 
 The first command creates a private key and a CSR from a very basic default set of config. The second command creates a signed certificate using the private key and the CSR. Since this is all done at start of life, clients won't be able to verify the certificate, and so will have to accept un-trusted certificates, which is not secure.
 
