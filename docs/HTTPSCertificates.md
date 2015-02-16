@@ -13,9 +13,11 @@ The first command creates a private key and a CSR from a very basic default set 
 
 ## Certificate signed by the service provider as a CA
 
-This involves generating the CSR before deploying nginx. This CSR then needs to be uploaded to all clients that need to contact nginx. It can then be used to create a signed certificate on the nginx server which the clients can verify. This is the recommended option, but it does require being able to upload the certificate to your clients.
+This involves generating the CSR before deploying nginx. This CSR then needs to be uploaded to all clients that need to contact the nginx server, and the nginx server itself. It can then be used to create a signed certificate on the nginx server which the clients can verify. This is the recommended option, but it does require being able to upload the certificate to your clients.
 
-The CSR can be generated using openssl, as in the first option above. The config file should have the format of [nginx_openssl_config](https://github.com/Metaswitch/clearwater-nginx/blob/master/clearwater-nginx/etc/nginx/ssl/nginx_openssl_config), with the default fields replaced. The CSR and private key can then be used to generate a signed certificate, again as in the first option above. The CSR then needs to be uploaded to your clients and the  private key and certificate need to be uploaded to your server.
+The CSR can be generated using openssl, as in the first option above. The config file should have the format of [nginx_openssl_config](https://github.com/Metaswitch/clearwater-nginx/blob/master/clearwater-nginx/etc/nginx/ssl/nginx_openssl_config), with the default fields replaced. The CSR and private key can then be uploaded onto the nginx server and used to generate a signed certificate, again as in the first option above. The CSR then needs to be uploaded to your clients.
+
+There are other means of generating your own CSR. However, note that bullet 1) of section 5.3.0 of the 3GPP specification 33.222 suggests that the client should check that the FQDN in the certificate is the same as the FQDN used to set up the HTTPS connection.
 
 ## Certificate signed by a well known CA
 
