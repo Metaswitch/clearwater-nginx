@@ -28,10 +28,12 @@ This involves the service provider acting as a CA and signing the CSR with the p
 The service provider can use Openssl to create a self-signed certificate and private key as in the first option above. The config file should have the format of [nginx_openssl_config](https://github.com/Metaswitch/clearwater-nginx/blob/master/clearwater-nginx/etc/nginx/ssl/nginx_openssl_config), with the default fields replaced. They can then run both commands again on their server, but rather than self-signing the new CSR they should use their first private key.
 
 For example, a service provider (e.g. Clearwater) would create their own certificate on a private box.
+
     openssl req -nodes -sha256 -newkey rsa:2048 -keyout clearwater.key -out clearwater.csr -config clearwater_openssl_config
     openssl x509 -sha256 -req -in clearwater.csr -signkey clearwater.key -out clearwater.crt
 
 They would then embed clearwater.crt into their clients, and upload clearwater.key onto their server in order to sign their nginx certificate.
+
     openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config clearwater_openssl_config
     openssl x509 -sha256 -req -in nginx.csr -signkey clearwater.key -out nginx.crt
 
