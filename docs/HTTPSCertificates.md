@@ -41,4 +41,4 @@ There are tools other than Openssl that can be used for generating signed public
 
 ## Certificate signed by a well known CA
 
-This involves paying an existing trusted CA to sign your certificates. The steps required vary from CA to CA, but in general you will need to produce a CSR (see above) which you will send, along with proof of identity to your CA who will send you back a signed certificate along with their certificate chain. The certificate chain will lead back to a certificate that the clients already trust, and so they will be able to verify the certificate. Popular CAs include Symantec, Comodo SSL and GlobalSign.
+This involves paying an existing trusted CA to sign your certificates. The steps required vary from CA to CA, but in general you will need to produce a CSR (see above) which you will send, along with proof of identity to your CA who will send you back a signed certificate along with their certificate chain. The certificate chain will lead back to a certificate that the clients already trust, and so they will be able to verify the certificate. This can be a timely and costly procedure. Popular CAs include Symantec, Comodo SSL and GlobalSign.
