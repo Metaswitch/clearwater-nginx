@@ -3,11 +3,12 @@
 We use Nginx to help provide secure HTTP communication between clients and servers. Nginx achieves this through HTTPS (HTTP over TLS/SSL). We have two requirements from HTTPS. We require a client to be able to verify the identity of a server, and we then require the client and the server to be able to communicate securely. We achieve the first of these two requirements through HTTPS certificates.
 
 In this document we'll refer to the following terms.
+
 * Public key - a public cryptographic key.
 * Private key - the corresponding private cryptographic key.
-* Certificate signing request (CSR) - a public key with a service provider's information embedded in it.
+* Certificate signing request (CSR) - a public key with a service provider's information embedded in it used by the CA to validate and create a certificate.
 * Certificate Authority (CA) - a body that signs a CSR with the private key of a known certificate.
-* Certificate - a signed CSR.
+* Certificate - a signed public key used by the server to try to prove its identity to the client.
 * Certificate chain - a chain of certificates, where each certificate has been signed by the next certificate in the chain.
 
 In order for the client to verify the identity of the server, the server sends a signed certificate to the client, who trusts the signature. The client may also request the certificate chain which was used to sign the certificate. Once the client has verified the certificate, it can use it to securely send a means of encryption for subsequent messages to the server. The server can read this using the private key, and the server and client can now exchange information securely. There are three options, outlined below, for generating the trusted certificate.
@@ -43,4 +44,4 @@ There are tools other than Openssl that can be used for generating signed public
 
 ## Certificate signed by a well known CA
 
-This involves paying an existing trusted CA to sign your certificates. The steps required vary from CA to CA, but in general you will need to produce a CSR (see above) which you will send, along with proof of identity to your CA who will send you back a signed certificate along with their certificate chain. The certificate chain will lead back to a certificate that the clients already trust, and so they will be able to verify the certificate. This can be a timely and costly procedure. Popular CAs include Symantec, Comodo SSL and GlobalSign.
+This involves paying an existing trusted CA to sign your certificates. The steps required vary from CA to CA, but in general you will need to produce a CSR (see above) which you will send, along with proof of identity to your CA who will send you back a signed certificate along with their certificate chain. The certificate chain will lead back to a certificate that the clients already trust, and so they will be able to verify the certificate. This can be a timely and costly procedure but ensures that any HTTPS client can validate the identity of your server. Popular CAs include Symantec, Comodo SSL and GlobalSign.
