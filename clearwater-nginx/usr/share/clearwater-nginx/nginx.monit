@@ -2,7 +2,9 @@
 # failed polls (and maybe kill the server) before we process the restart.
 
 check process nginx pidfile /var/run/nginx.pid
-  start program   = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
+  # Kill all running nginx processes before starting up (as if any slave processes are still running after the master process
+  # dies then nginx can't restart
+  start program   = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
   stop program    = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
 
   if memory is greater than 80% for 3 cycles
