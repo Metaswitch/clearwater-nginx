@@ -37,13 +37,12 @@
 check process nginx pidfile /var/run/nginx.pid
   # Kill all running nginx processes before starting up (as if any slave processes are still running after the master process
   # dies then nginx can't restart
-  start program   = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
-  stop program    = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
-  restart program    = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx restart'"
+  start program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
+  stop program = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
+  restart program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx restart'"
 
   # Check the service's resource usage, and stop the process if it's too high.
   # Monit will raise an alarm when it restarts the process
-  if cpu > 80% for 6 cycles then restart
   if memory > 80% for 6 cycles then restart
 
   # Clear any alarms if the process has been running for 30 seconds
