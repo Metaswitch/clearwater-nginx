@@ -34,7 +34,9 @@
 
 # Check the nginx process.
 
-check process nginx pidfile /var/run/nginx.pid
+check process nginx_process pidfile /var/run/nginx.pid
+  group nginx
+
   # Kill all running nginx processes before starting up (as if any slave processes are still running after the master process
   # dies then nginx can't restart
   start program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
