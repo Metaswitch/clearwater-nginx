@@ -62,7 +62,7 @@ case "$1" in
       # Remove the default config and enable the ping server.
       rm -f /etc/nginx/sites-enabled/default
       rm -f /etc/nginx/sites-available/default
-      nginx_ensite ping && service nginx reload
+      nginx_ensite ping
       mkdir -p /etc/nginx/ssl && cd /etc/nginx/ssl
       # Create a private key and a certificate signing request
       openssl req -nodes -sha256 -newkey rsa:2048 -keyout nginx.key -out nginx.csr -config nginx_openssl_config
