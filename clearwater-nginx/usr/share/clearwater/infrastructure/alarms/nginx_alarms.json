@@ -1,0 +1,21 @@
+{
+    "alarms": [
+        {
+            "index": 5001,
+            "cause": "SOFTWARE_ERROR",
+            "name": "MEMENTO_PROXY_SERVER_PROCESS_FAIL",
+            "levels": [
+                {
+                    "severity": "CLEARED",
+                    "details": "The Memento Web Proxy Server process has been restored to normal operation.",
+                    "description": "Memento: Web Proxy Server process failure cleared"
+                },
+                {
+                    "severity": "CRITICAL",
+                    "details": "While this condition persists, all attempts to retrieve call lists from this Memento server will fail, but no call list records will be lost. Monit will automatically attempt to restart the Web Proxy Server process. ",
+                    "description": "Memento: Web Proxy Server process failure"
+                }
+            ]
+        },
+    ]
+}
