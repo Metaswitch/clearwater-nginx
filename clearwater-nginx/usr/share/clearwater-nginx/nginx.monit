@@ -53,6 +53,7 @@ check process nginx_process pidfile /var/run/nginx.pid
      request "/ping"
      timeout 1 second
      for 3 cycles
+     then restart
 
 # Clear any alarms if the process has been running long enough.
 check program nginx_uptime with path "/usr/share/clearwater/bin/check-uptime /var/run/nginx.pid"
@@ -60,4 +61,3 @@ check program nginx_uptime with path "/usr/share/clearwater/bin/check-uptime /va
   depends on nginx_process
   every 3 cycles
   if status = 0 then exec "/usr/share/clearwater/bin/issue_alarm.py monit 5001.1"
-     then restart
