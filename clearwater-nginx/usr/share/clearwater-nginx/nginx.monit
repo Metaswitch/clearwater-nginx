@@ -47,11 +47,6 @@ check process nginx_process pidfile /var/run/nginx.pid
   # Monit will raise an alarm when it restarts the process
   if memory > 80% for 6 cycles then restart
 
-  # Clear any alarms if the process has been running for 30 seconds
-  if uptime < 30 seconds
-     then exec "/bin/true"
-     else if succeeded then exec "/usr/share/clearwater/bin/issue_alarm.py monit 5001.1"
-
   # Check nginx is responsive
   if failed host 127.0.0.1 port 80 protocol http
      hostheader 'ping'
@@ -59,3 +54,10 @@ check process nginx_process pidfile /var/run/nginx.pid
      timeout 1 second
      for 3 cycles
      then restart
+
+# Clear any alarms if the process has been running long enough.
+check program nginx_uptime with path "/usr/share/clearwater/bin/check-uptime /var/run/nginx.pid"
+  group nginx
+  depends on nginx_process
+  every 3 cycles
+  if status = 0 then exec "/usr/share/clearwater/bin/issue_alarm.py monit 5001.1"
