@@ -1,7 +1,9 @@
-# @file clearwater-nginx.monit
+#!/bin/sh
+
+# @file check-nginx-uptime
 #
 # Project Clearwater - IMS in the Cloud
-# Copyright (C) 2015  Metaswitch Networks Ltd
+# Copyright (C) 2016  Metaswitch Networks Ltd
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -32,32 +34,7 @@
 # under which the OpenSSL Project distributes the OpenSSL toolkit software,
 # as those licenses appear in the file LICENSE-OPENSSL.
 
-# Check the nginx process.
-
-check process nginx_process pidfile /var/run/nginx.pid
-  group nginx
-
-  # Kill all running nginx processes before starting up (as if any slave processes are still running after the master process
-  # dies then nginx can't restart
-  start program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx start'"
-  stop program = "/bin/bash -c '/usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx stop'"
-  restart program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue_alarm.py monit 5001.3; /etc/init.d/nginx restart'"
-
-  # Check the service's resource usage, and stop the process if it's too high.
-  # Monit will raise an alarm when it restarts the process
-  if memory > 80% for 6 cycles then restart
-
-  # Check nginx is responsive
-  if failed host 127.0.0.1 port 80 protocol http
-     hostheader 'ping'
-     request "/ping"
-     timeout 1 second
-     for 3 cycles
-     then restart
-
-# Clear any alarms if the process has been running long enough.
-check program nginx_uptime with path /usr/share/clearwater/infrastructure/scripts/check-nginx-uptime
-  group nginx
-  depends on nginx_process
-  every 3 cycles
-  if status != 0 then alert
+# Monit 5.8.1 does not support passing arguments to check program scripts.
+# check-uptime provides common uptime-checking code. This wrapper script
+# uses it, and can be called with no arguments.
+/usr/share/clearwater/bin/check-uptime /var/run/nginx.pid monit 5001.1
