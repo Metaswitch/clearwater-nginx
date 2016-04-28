@@ -3,23 +3,23 @@
         {
             "index": 5001,
             "cause": "SOFTWARE_ERROR",
-            "name": "MEMENTO_PROXY_SERVER_PROCESS_FAIL",
+            "name": "HTTP_PROXY_SERVER_PROCESS_FAIL",
             "levels": [
                 {
                     "severity": "CLEARED",
-                    "details": "The Memento Web Proxy Server process has been restored to normal operation.",
-                    "description": "Memento: Web Proxy Server process failure cleared",
-                    "cause": "The Memento Web Proxy Server process has been restored to normal operation. The previously issued alarm has been cleared.",
-                    "effect": "Users are able to retrieve their call lists from this Memento server.",
+                    "details": "The HTTP Proxy Server process has been restored to normal operation.",
+                    "description": "NGINX: HTTP Proxy Server process failure cleared",
+                    "cause": "The HTTP Proxy Server process has been restored to normal operation. The previously issued alarm has been cleared.",
+                    "effect": "Users are able to use any HTTP interfaces on this node.",
                     "action": "No action."
                 },
                 {
                     "severity": "CRITICAL",
-                    "details": "While this condition persists, all attempts to retrieve call lists from this Memento server will fail, but no call list records will be lost. Monit will automatically attempt to restart the Web Proxy Server process. ",
-                    "description": "Memento: Web Proxy Server process failure",
-                    "cause": "The system has detected that the Memento Web Proxy Server process has failed.",
-                    "effect": "Users are unable to retrieve their call lists from this Memento server, but no call list records will be lost.",
-                    "action": "Monitor for the alarm to clear and confirm the system is operating normally. If the failed Memento Web Proxy Server process fails to return to service then contact your support representative."
+                    "details": "While this condition persists, all attempts to use any external HTTP interfaces on this node will fail, but no data will be lost. Monit will automatically attempt to restart the HTTP Proxy Server process. ",
+                    "description": "NGINX: HTTP Proxy Server process failure",
+                    "cause": "The system has detected that the HTTP Proxy Server process has failed.",
+                    "effect": "Users are unable to use any external HTTP interfaces on this node, but no data will be lost.",
+                    "action": "Monitor for the alarm to clear and confirm the system is operating normally. If the failed HTTP Proxy Server process fails to return to service then contact your support representative."
                 }
             ]
         }
