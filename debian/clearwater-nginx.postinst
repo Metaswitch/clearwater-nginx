@@ -70,7 +70,7 @@ case "$1" in
       openssl x509 -sha256 -req -in nginx.csr -signkey nginx.key -out nginx.crt
 
       service nginx stop || true
-      reload clearwater-monit || true
+      pkill -HUP monit || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
