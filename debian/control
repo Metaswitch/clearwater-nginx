@@ -11,6 +11,6 @@ Homepage: http://projectclearwater.org/
 
 Package: clearwater-nginx
 Architecture: all
-Depends: nginx (>= 1.1.19), openssl, clearwater-infrastructure
+Depends: nginx (>= 1.1.19), openssl, clearwater-infrastructure, clearwater-monit
 Suggests: clearwater-snmp-handler-alarm
 Description: Nginx configured for Clearwater
