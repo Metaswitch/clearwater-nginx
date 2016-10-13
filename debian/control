@@ -5,7 +5,7 @@ Priority: optional
 # clearwater-infrastructure explicitly checks for packages of this name when
 # updating
 Maintainer: Project Clearwater Maintainers <maintainers@projectclearwater.org>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), config-package-dev
 Standards-Version: 3.9.2
 Homepage: http://projectclearwater.org/
 
@@ -13,4 +13,6 @@ Package: clearwater-nginx
 Architecture: all
 Depends: nginx (>= 1.1.19), openssl, clearwater-infrastructure, clearwater-monit
 Suggests: clearwater-snmp-handler-alarm
+Provides: ${diverted-files}
+Conflicts: ${diverted-files}
 Description: Nginx configured for Clearwater
