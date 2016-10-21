@@ -56,7 +56,7 @@ check process nginx_process pidfile /var/run/nginx.pid
      then restart
 
 # Clear any alarms if the process has been running long enough.
-check program nginx_uptime with path /usr/share/clearwater/infrastructure/scripts/check-nginx-uptime
+check program nginx_uptime with path /usr/share/clearwater/infrastructure/monit_uptime/check-nginx-uptime
   group nginx
   depends on nginx_process
   every 3 cycles
