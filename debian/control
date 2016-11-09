@@ -4,8 +4,11 @@ Priority: optional
 # This field must stay as 'Project Clearwater Maintainers', as
 # clearwater-infrastructure explicitly checks for packages of this name when
 # updating
+#
+# We need nginx as a build dependency because clearwater-nginx requires
+# /etc/nginx/nginx.conf to be present for its build
 Maintainer: Project Clearwater Maintainers <maintainers@projectclearwater.org>
-Build-Depends: debhelper (>= 8.0.0), config-package-dev
+Build-Depends: nginx (>= 1.1.19), debhelper (>= 8.0.0), config-package-dev
 Standards-Version: 3.9.2
 Homepage: http://projectclearwater.org/
 
