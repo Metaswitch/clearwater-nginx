@@ -34,14 +34,19 @@
 
 # Check the nginx process.
 
+. /etc/clearwater/config
+
+[ -z "$nginx_namespace" ] || namespace_prefix="ip netns exec $nginx_namespace"
+
+cat > /etc/monit/conf.d/nginx.monit <<EOF
 check process nginx_process pidfile /var/run/nginx.pid
   group nginx
 
   # Kill all running nginx processes before starting up (as if any slave processes are still running after the master process
   # dies then nginx can't restart
-  start program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue-alarm monit 5001.3; /etc/init.d/nginx start'"
-  stop program = "/bin/bash -c '/usr/share/clearwater/bin/issue-alarm monit 5001.3; /etc/init.d/nginx stop'"
-  restart program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue-alarm monit 5001.3; /etc/init.d/nginx restart'"
+  start program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue-alarm monit 5001.3; $nginx_namespace /etc/init.d/nginx start'"
+  stop program = "/bin/bash -c '/usr/share/clearwater/bin/issue-alarm monit 5001.3; $nginx_namespace /etc/init.d/nginx stop'"
+  restart program = "/bin/bash -c 'killall -9 nginx; /usr/share/clearwater/bin/issue-alarm monit 5001.3; $nginx_namespace /etc/init.d/nginx restart'"
 
   # Check the service's resource usage, and stop the process if it's too high.
   # Monit will raise an alarm when it restarts the process
@@ -61,3 +66,8 @@ check program nginx_uptime with path /usr/share/clearwater/infrastructure/monit_
   depends on nginx_process
   every 3 cycles
   if status != 0 then alert
+EOF
+chmod 0644 /etc/monit/conf.d/nginx.monit
+
+# Force monit to reload its configuration
+reload clearwater-monit || true
