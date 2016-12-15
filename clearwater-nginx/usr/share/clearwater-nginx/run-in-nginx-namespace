@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-# @file nginx_ping
-#
+# @file run-in-nginx-namespace
+
 # Project Clearwater - IMS in the Cloud
-# Copyright (C) 2016  Metaswitch Networks Ltd
+# Copyright (C) 2015  Metaswitch Networks Ltd
 #
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -34,5 +34,9 @@
 # under which the OpenSSL Project distributes the OpenSSL toolkit software,
 # as those licenses appear in the file LICENSE-OPENSSL.
 
-/usr/share/clearwater-nginx/run-in-nginx-namespace curl 127.0.0.1:80/ping
-exit $?
+. /usr/share/clearwater/utils/check-root-permissions 1
+
+# Returns the namespace_prefix (only set if the nginx_namespace is in use).
+. /etc/clearwater/config
+[ -z "$nginx_namespace" ] || namespace_prefix="ip netns exec $nginx_namespace"
+$namespace_prefix $*
