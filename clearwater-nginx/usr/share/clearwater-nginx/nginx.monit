@@ -25,7 +25,7 @@ check process nginx_process pidfile /var/run/nginx.pid
 
   # Check the service's resource usage, and stop the process if it's too high.
   # Monit will raise an alarm when it restarts the process
-  if memory > 80% for 6 cycles then restart
+  if memory > 80% then restart
 
 # Check nginx is responsive
 check program nginx_ping with path /usr/share/clearwater-nginx/nginx_ping
