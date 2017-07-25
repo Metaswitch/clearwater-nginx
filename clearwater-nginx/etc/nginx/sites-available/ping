@@ -1,5 +1,5 @@
 server {
-        listen      [::1]:80 ipv6only=off;
+        listen      [::]:80 ipv6only=off;
         server_name ping;
 
         location /ping {
