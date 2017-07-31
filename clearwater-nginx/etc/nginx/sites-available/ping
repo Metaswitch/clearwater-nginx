@@ -1,5 +1,6 @@
 server {
-        listen      [::]:80 ipv6only=off;
+        listen      [::1]:8000;
+        listen      127.0.0.1:8000;
         server_name ping;
 
         location /ping {
