@@ -1,1 +1,4 @@
+# Wrapper script for the nginx init script. Ensures that nginx is run in its own namespace if
+# one is configured in /etc/clearwater/config
+
 /usr/share/clearwater-nginx/run-in-nginx-namespace /etc/init.d/nginx.clearwater-orig "$@"
