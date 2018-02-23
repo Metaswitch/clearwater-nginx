@@ -1,0 +1,1 @@
+/usr/share/clearwater-nginx/run-in-nginx-namespace /etc/init.d/nginx.clearwater-orig "$@"

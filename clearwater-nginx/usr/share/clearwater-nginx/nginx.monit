@@ -16,12 +16,12 @@ check process nginx_process pidfile /var/run/nginx.pid
   # dies then nginx can't restart
   start program = "/bin/bash -c 'killall -9 nginx;
                    /usr/share/clearwater/bin/issue-alarm monit 5001.3;
-                   /usr/share/clearwater-nginx/run-in-nginx-namespace /etc/init.d/nginx start'"
+                   /etc/init.d/nginx start'"
   stop program = "/bin/bash -c '/usr/share/clearwater/bin/issue-alarm monit 5001.3;
-                  /usr/share/clearwater-nginx/run-in-nginx-namespace /etc/init.d/nginx stop'"
+                  /etc/init.d/nginx stop'"
   restart program = "/bin/bash -c 'killall -9 nginx;
                     /usr/share/clearwater/bin/issue-alarm monit 5001.3;
-                    /usr/share/clearwater-nginx/run-in-nginx-namespace /etc/init.d/nginx restart'"
+                    /etc/init.d/nginx restart'"
 
   # Check the service's resource usage, and stop the process if it's too high.
   # Monit will raise an alarm when it restarts the process
